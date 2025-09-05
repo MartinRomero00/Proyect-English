@@ -411,12 +411,12 @@ const TitleSlide = ({ slide }) => (
     >
       <div className="bg-white/20 backdrop-blur-lg rounded-3xl p-6 border-2 border-white/30 max-w-sm mx-auto">
         <h3 className="text-lg font-bold mb-4">Share This Presentation</h3>
-        <div className="w-24 h-24 bg-white/20 rounded-2xl mx-auto mb-4 flex items-center justify-center border-2 border-dashed border-white/40">
-          <div className="text-center">
-            <div className="text-xl mb-1">📱</div>
-            <div className="text-xs">QR Code</div>
-            <div className="text-xs opacity-80">Coming Soon</div>
-          </div>
+        <div className="w-32 h-32 bg-white rounded-2xl mx-auto mb-4 flex items-center justify-center border-2 border-white/40 p-2">
+          <img
+            src="/qr.svg"
+            alt="QR Code to access presentation"
+            className="w-full h-full"
+          />
         </div>
         <p className="text-xs opacity-80">
           Scan to access the full interactive presentation
@@ -870,36 +870,40 @@ const InteractiveSlide = ({ slide }) => {
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-br from-green-600 via-teal-600 to-blue-600 text-white p-8"
+      className="min-h-screen bg-gradient-to-br from-green-600 via-teal-600 to-blue-600 text-white p-8 flex items-center justify-center"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
     >
-      <div className="max-w-4xl mx-auto">
-        <motion.h1 className="text-4xl md:text-6xl font-bold text-center mb-8">
+      <div className="max-w-2xl mx-auto w-full">
+        <motion.h1 className="text-4xl md:text-6xl font-bold text-center mb-6">
           {slide.title}
         </motion.h1>
-        <motion.p className="text-xl text-center mb-12 opacity-90">
+        <motion.p className="text-lg md:text-xl text-center mb-8 opacity-90">
           {slide.content}
         </motion.p>
 
-        <div className="bg-white/20 backdrop-blur-lg rounded-3xl p-8 border-2 border-white/30">
-          <div className="bg-black rounded-2xl p-6 mb-6">
+        <div className="bg-white/20 backdrop-blur-lg rounded-3xl p-6 border-2 border-white/30">
+          <div className="bg-black rounded-2xl p-4 md:p-6">
             <div className="flex justify-between items-center mb-4">
               <div className="flex items-center">
-                <div className="w-10 h-10 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mr-3"></div>
+                <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full mr-3"></div>
                 <div>
-                  <div className="font-bold">@socialmedia_addict</div>
-                  <div className="text-sm opacity-60">2 minutes ago</div>
+                  <div className="font-bold text-sm md:text-base">
+                    @socialmedia_addict
+                  </div>
+                  <div className="text-xs opacity-60">2 minutes ago</div>
                 </div>
               </div>
             </div>
 
-            <div className="text-lg mb-4">
+            <div className="text-sm md:text-lg mb-4 leading-relaxed">
               Just one more scroll... I promise this is the last one 📱✨
-              #AddictedToScrolling #SendHelp
+              <br />
+              <span className="text-blue-400">#AddictedToScrolling</span>{" "}
+              <span className="text-pink-400">#SendHelp</span>
             </div>
 
-            <div className="flex justify-between items-center">
+            <div className="flex justify-center space-x-4">
               {elements.map((element, index) => {
                 const icons = {
                   like: Heart,
@@ -911,7 +915,7 @@ const InteractiveSlide = ({ slide }) => {
                 return (
                   <motion.button
                     key={element.type}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all ${
+                    className={`flex items-center space-x-2 px-3 py-2 md:px-4 md:py-2 rounded-full transition-all ${
                       element.active
                         ? "bg-red-500 text-white"
                         : "bg-gray-700 text-gray-300"
@@ -920,16 +924,18 @@ const InteractiveSlide = ({ slide }) => {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => handleInteraction(index, element.type)}
                   >
-                    <IconComponent size={20} />
-                    <span>{element.count}</span>
+                    <IconComponent size={16} className="md:w-5 md:h-5" />
+                    <span className="text-sm md:text-base">
+                      {element.count}
+                    </span>
                   </motion.button>
                 );
               })}
             </div>
           </div>
 
-          <div className="text-center">
-            <div className="text-lg opacity-80">
+          <div className="text-center mt-6">
+            <div className="text-sm md:text-lg opacity-90">
               Try clicking the buttons above! Can you resist the dopamine hit?
               🧠💫
             </div>
@@ -942,50 +948,52 @@ const InteractiveSlide = ({ slide }) => {
 
 const ChartSlide = ({ slide }) => (
   <motion.div
-    className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white p-8"
+    className="min-h-screen bg-gradient-to-br from-gray-900 via-purple-900 to-violet-900 text-white p-4 md:p-8"
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
   >
     <div className="max-w-6xl mx-auto">
-      <motion.h1 className="text-4xl md:text-6xl font-bold text-center mb-8">
+      <motion.h1 className="text-3xl md:text-4xl lg:text-6xl font-bold text-center mb-6 md:mb-8">
         {slide.title}
       </motion.h1>
-      <motion.p className="text-xl text-center mb-12 opacity-90">
+      <motion.p className="text-lg md:text-xl text-center mb-8 md:mb-12 opacity-90 px-2">
         {slide.content}
       </motion.p>
 
-      <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-        <h3 className="text-2xl font-bold text-center mb-8">
+      <div className="bg-white/10 backdrop-blur-lg rounded-2xl md:rounded-3xl p-4 md:p-8 border border-white/20">
+        <h3 className="text-xl md:text-2xl font-bold text-center mb-6 md:mb-8">
           Platform Addiction Levels
         </h3>
 
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           {slide.chartData.map((platform, index) => (
             <motion.div
               key={platform.platform}
-              className="flex items-center"
+              className="flex flex-col md:flex-row md:items-center space-y-2 md:space-y-0"
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 * index }}
             >
-              <div className="w-24 font-bold">{platform.platform}</div>
-              <div className="flex-1 mx-4">
-                <div className="bg-gray-700 rounded-full h-6 overflow-hidden">
+              <div className="w-full md:w-24 font-bold text-center md:text-left">
+                {platform.platform}
+              </div>
+              <div className="flex-1 md:mx-4">
+                <div className="bg-gray-700 rounded-full h-8 md:h-6 overflow-hidden">
                   <motion.div
-                    className={`h-full ${platform.color} rounded-full flex items-center justify-end pr-2`}
+                    className={`h-full ${platform.color} rounded-full flex items-center justify-center md:justify-end md:pr-2`}
                     initial={{ width: 0 }}
                     animate={{ width: `${platform.engagement}%` }}
                     transition={{ delay: 0.3 + 0.1 * index, duration: 0.8 }}
                   >
-                    <span className="text-white text-sm font-bold">
+                    <span className="text-white text-sm md:text-sm font-bold">
                       {platform.engagement}%
                     </span>
                   </motion.div>
                 </div>
               </div>
-              <div className="w-32 text-right">
+              <div className="w-full md:w-32 text-center md:text-right mt-2 md:mt-0">
                 <span
-                  className={`px-2 py-1 rounded-full text-xs font-bold ${
+                  className={`px-3 py-1 md:px-2 rounded-full text-xs font-bold ${
                     platform.addiction === "MAXIMUM"
                       ? "bg-red-500"
                       : platform.addiction === "HIGH"
